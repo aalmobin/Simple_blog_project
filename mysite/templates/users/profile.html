@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %} Profile {% endblock %}
+{% block css %}
+    <link href="{% static 'css/heroic-features.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+   <div class="jumbotron my-4 col-md-6 offset-md-3 offset-sm-0">
+        <div class="col-lg-10 col-md-6 mb-3">
+          <div class="card h-100">
+            <img class="card-img-top" src="{{ user.profile.image.url }}" alt="">
+            <div class="card-body">
+              <h4 class="card-title">{{user.username}}</h4>
+              <p class="card-text">{{user.email}}</p>
+            </div>
+            <div class="card-footer">
+              <a href="{% url 'update_profile' %}" class="btn btn-secondary">Update Profile</a>
+            </div>
+          </div>
+        </div>
+   </div>
+{% endblock %}
