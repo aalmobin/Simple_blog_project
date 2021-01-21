@@ -17,7 +17,7 @@
         <!-- Author -->
         <p class="lead">
           by
-          <a href="#">{{ object.author }}</a>
+          <a href="{% url 'post-lists' object.author.username %}">{{ object.author }}</a>
         </p>
 
         <hr>
