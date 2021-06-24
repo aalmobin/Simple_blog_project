@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post
+from .models import Post, Comment
 
 
 class PostListView(ListView):
@@ -70,3 +70,15 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
+
+
+class PostComment(LoginRequiredMixin, CreateView):
+    """the Comment page view"""
+    model = Comment
+    fields = ['body']
+    template_name = 'blog/create_comment.html'
+
+    def form_valid(self, form):
+        form.instance.c_author = self.request.user
+        form.instance.post_id = self.kwargs['pk']
+        return super().form_valid(form)
