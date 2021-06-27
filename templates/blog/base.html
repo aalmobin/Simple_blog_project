@@ -57,7 +57,7 @@
   </nav>
     {% if messages %}
        {% for mess in messages %}
-           <div class="alert alert-{{ mess.tags }}" role="alert">
+           <div class="alert alert-{{ mess.tags }} text-center" role="alert">
                 {{ mess }}
            </div>
        {% endfor %}
