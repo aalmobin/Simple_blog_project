@@ -13,7 +13,6 @@
       {% for post in posts %}
         <div class="col-lg-4 col-md-6 mb-3">
           <div class="card h-100">
-            <img class="card-img-top" src="{{ post.author.profile.image.url }}" alt="">
             <div class="card-body">
               <h4 class="card-title">{{post.title}}</h4>
                  <h5>Posted By <a href="{% url 'post-lists' post.author.username %}">{{ post.author }}</a></h5>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
-from .forms import UserRegisterForm, UpdateProfile, UpdateUser
+from .forms import UserRegisterForm, UpdateUser
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -33,18 +33,14 @@ class ProfileUpdate(View):
 
     def get(self, request, *args, **kwargs):
         u_form = UpdateUser(instance=request.user)
-        p_form = UpdateProfile(instance=request.user.profile)
         context = {
             'u_form': u_form,
-            'p_form': p_form
         }
         return render(request, 'users/update_profile.html', context)
 
     def post(self, request, *args, **kwargs):
         u_form = UpdateUser(request.POST, instance=request.user)
-        p_form = UpdateProfile(request.POST, request.FILES, instance=request.user.profile)
-        if u_form.is_valid() and p_form.is_valid():
+        if u_form.is_valid():
             u_form.save()
-            p_form.save()
             messages.success(request, 'Your profile has been updated')
             return redirect('profile')
